@@ -1,0 +1,135 @@
+/* LIFECARE - main stylesheet (modern teal theme) */
+:root {
+    --brand:#0b6b73; --brand-dark:#084f56; --brand-soft:#e3f2f3; --accent:#9ee8ee;
+    --bg:#eef4f5; --line:#e1e8ea; --text:#1b2e31; --muted:#66797c;
+    --shadow:0 4px 18px rgba(11,107,115,.10);
+}
+
+* { box-sizing:border-box; }
+body { margin:0; color:var(--text); font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+       background: radial-gradient(circle at 90% 0%, #d9eef0 0%, transparent 40%), var(--bg); }
+
+/* ---------- layout ---------- */
+.layout  { display:flex; min-height:100vh; }
+
+.sidebar { width:248px; flex-shrink:0; color:#fff; padding-top:10px;
+           background: linear-gradient(180deg, #04262b 0%, #0b4a52 60%, #0e6068 100%);
+           box-shadow: 4px 0 24px rgba(4,38,43,.25); position:relative; z-index:2; }
+.brand   { display:flex; align-items:center; gap:12px; padding:18px 20px 22px; font-weight:800; font-size:20px;
+           letter-spacing:.14em; color:#fff; }
+.brand small { display:block; font-weight:400; font-size:11px; color:#a9d3d6; letter-spacing:.04em; margin-top:2px; }
+.brand .name { line-height:1.1; }
+
+.sidebar a { display:block; margin:3px 12px; padding:11px 16px; color:#cfeef0; text-decoration:none;
+             border-radius:10px; transition: background .2s, transform .2s, color .2s; }
+.sidebar a:hover { background:rgba(255,255,255,.12); color:#fff; transform:translateX(4px); }
+.sidebar a.active { background:linear-gradient(90deg, rgba(158,232,238,.30), rgba(158,232,238,.10));
+                    color:#fff; font-weight:700; box-shadow: inset 3px 0 0 var(--accent); }
+
+.content { flex:1; min-width:0; }
+.topbar  { background:rgba(255,255,255,.85); backdrop-filter: blur(8px); border-bottom:1px solid var(--line);
+           padding:12px 28px; display:flex; justify-content:space-between; align-items:center;
+           position:sticky; top:0; z-index:1; }
+.role    { background:var(--brand-soft); color:var(--brand); padding:3px 12px; border-radius:99px;
+           font-size:12px; font-style:normal; font-weight:600; margin-left:8px; text-transform:capitalize; }
+.logout  { color:#fff; background:var(--brand); padding:8px 16px; border-radius:8px; text-decoration:none;
+           font-weight:600; transition: background .2s, transform .2s; }
+.logout:hover { background:var(--brand-dark); transform:translateY(-1px); }
+.page    { padding:28px; animation: pagein .45s ease both; }
+@keyframes pagein { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+
+/* ---------- 3D logo in the sidebar ---------- */
+.logo3d { width:38px; height:38px; perspective:300px; flex-shrink:0; }
+.logo3d .spin { position:relative; width:38px; height:38px; transform-style:preserve-3d; animation: logospin 8s linear infinite; }
+.logo3d .layer { position:absolute; inset:0; background:linear-gradient(145deg, #bff7fa, #4fc3cc);
+    clip-path: polygon(35% 0, 65% 0, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0 65%, 0 35%, 35% 35%); }
+.logo3d .l1 { transform: translateZ(-7px); opacity:.6; }
+.logo3d .l2 { transform: translateZ(0); }
+.logo3d .l3 { transform: translateZ(7px); opacity:.85; }
+@keyframes logospin { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
+
+/* ---------- headings, cards, forms ---------- */
+h1 { margin:0 0 18px; font-size:28px; letter-spacing:-.01em; }
+h2 { margin:0 0 14px; font-size:18px; }
+small { color:var(--muted); }
+.card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px; margin-bottom:22px;
+        box-shadow:var(--shadow); transition: transform .25s, box-shadow .25s; }
+.card:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(11,107,115,.16); }
+
+label { display:block; font-size:13px; font-weight:600; margin-bottom:5px; color:#33484b; }
+input, select, textarea { width:100%; padding:10px 12px; border:1px solid #c9d6d8; border-radius:10px;
+        font:inherit; background:#fff; transition: border-color .2s, box-shadow .2s; }
+input:focus, select:focus, textarea:focus { outline:none; border-color:var(--brand); box-shadow:0 0 0 3px rgba(11,107,115,.18); }
+.form-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:16px; align-items:end; }
+.span-2 { grid-column: 1 / -1; }
+.form-buttons { display:flex; align-items:center; gap:14px; }
+
+.btn { background:linear-gradient(135deg, #0e8791, var(--brand)); color:#fff; border:0; padding:11px 20px; border-radius:10px;
+       font:inherit; font-weight:600; cursor:pointer; box-shadow:0 4px 12px rgba(11,107,115,.28);
+       transition: transform .2s, box-shadow .2s; }
+.btn:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(11,107,115,.35); }
+a.btn { text-decoration:none; display:inline-block; }
+.btn-secondary { color:#33484b; text-decoration:none; font-weight:600; }
+.btn-secondary:hover { text-decoration:underline; }
+.toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+.toolbar h1 { margin:0; }
+.search-form input { max-width:380px; }
+
+/* ---------- messages ---------- */
+.alert { padding:12px 16px; border-radius:10px; margin-bottom:18px; border-left:4px solid; }
+.alert.error   { background:#fdeaea; color:#9b2222; border-color:#d9534f; }
+.alert.success { background:#e3f6e8; color:#1d6b34; border-color:#3c9d5b; }
+.alert a { color:inherit; font-weight:700; }
+
+/* ---------- tables ---------- */
+.table-wrap { overflow-x:auto; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:6px 10px 10px; }
+table { width:100%; border-collapse:collapse; }
+th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:middle; }
+th { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+tbody tr { transition: background .15s; }
+tbody tr:hover { background:#f3fafa; }
+tbody tr:last-child td { border-bottom:0; }
+td a { color:var(--brand); font-weight:600; text-decoration:none; }
+td a:hover { text-decoration:underline; }
+td.actions { white-space:nowrap; }
+.pill { padding:3px 12px; border-radius:99px; font-size:12px; font-weight:600; display:inline-block; }
+.pill.ok, .pill.Completed { background:#dff3e4; color:#1d6b34; }
+.pill.off, .pill.Cancelled { background:#fbe3e3; color:#9b2222; }
+.pill.Scheduled { background:#fdf0dc; color:#8a4b00; }
+
+/* buttons that look like links */
+.inline-form { display:inline; margin-left:14px; }
+.link-danger, .link-plain { background:none; border:0; padding:0; font:inherit; font-weight:600; cursor:pointer; width:auto; }
+.link-danger { color:#c0392b; }
+.link-plain  { color:var(--brand); }
+.link-danger:hover, .link-plain:hover { text-decoration:underline; }
+
+/* ---------- medical records ---------- */
+.summary-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:16px; margin-bottom:16px; }
+.summary-grid span { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.summary-grid strong { font-size:16px; }
+.history-box { background:var(--brand-soft); border-radius:10px; padding:12px 16px; }
+.record-item { border-left:4px solid var(--brand); background:#fff; padding:14px 18px; margin-bottom:14px;
+               border-radius:0 12px 12px 0; box-shadow:var(--shadow); }
+.record-item .meta { color:var(--muted); font-size:13px; margin-bottom:6px; }
+.record-item p { margin:4px 0; white-space:pre-wrap; }
+
+/* ---------- older dashboard classes (kept so nothing breaks) ---------- */
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:16px; margin:20px 0; }
+.stat-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow); }
+.stat-value { font-size:34px; font-weight:700; color:var(--brand); line-height:1.1; }
+.stat-label { margin-top:6px; color:var(--muted); font-size:14px; }
+
+/* ---------- phones ---------- */
+@media (max-width: 768px) {
+    .layout { flex-direction:column; }
+    .sidebar { width:100%; display:flex; flex-wrap:wrap; padding:6px; }
+    .brand { width:100%; padding:10px 14px; }
+    .sidebar a { margin:2px; padding:8px 12px; }
+    .page { padding:18px 14px; }
+    .topbar { padding:10px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .logo3d .spin, .page { animation:none !important; }
+    .card, .btn, .sidebar a { transition:none; }
+}
