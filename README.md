@@ -7,4 +7,4 @@ patient registration, appointments, medical records, reports and user roles
 Built with PHP, MySQL, HTML, CSS and JavaScript (XAMPP).
 
 Developer: Derrick Muthiga Maina
-Zetech University, Diploma in Computer Science
+Zetech University, Diploma in software engineering
